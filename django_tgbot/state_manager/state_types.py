@@ -1,0 +1,2 @@
+All = '_ALL_STATES'
+Keep = '_KEEP_THE_WAITING_FOR'
