@@ -1,3 +1,0 @@
-=====
-Telegram Bots in Django
-=====
