@@ -165,5 +165,40 @@ def say_hello(bot, update, state):
 
 Please note that leaving the `success` and `fail` parameters is NOT the same as setting them to `state_types.Keep`. Leaving them will not change them and allows you to set them in the processor's run time. However, setting them to `state_types.Keep` will force the state to be the same as what is was before entering the processor.
 
-A demo bot created with `django-tgbot`: [https://github.com/ARKhoshghalb/django-tgbot_demo](https://github.com/ARKhoshghalb/django-tgbot_demo)  
-Full documentation: [https://django-tgbot.readthedocs.io/en/latest/](https://django-tgbot.readthedocs.io/en/latest/)
+### Using the API methods
+
+The interface you can use for sending requests to the Bot API is the TelegramBot class and an instance of it will be created when you start a new bot.
+
+All of the methods on Telegram API are implemented in this class. Furthermore, if you want to send any custom request or call any method, you can use the method `send_request` to do so.
+
+You should have a look at the API documentations while calling methods as they might have certain requirements on some arguments. For example, `parse_mode` argument on some methods,
+only accepts a few fixed strings and inline keyboards have three optional fields that exactly one of them should be filled with a value.
+
+You might need to use the defined `Type`s to create and pass data more easily, in cases that Telegram expects a certain type as the value for some parameter. For example,
+if you want to send a keyboard as the `reply_markup` for some message, you can create the keyboard object with the `ReplyKeyboardMarkup` object and pass
+it as the value. Please note that `Type` classes' constructor is designed to accept a JSON object. If you want to create an instance of such classes,
+you should use another method called `a`. 
+
+All of the `Type`s have a method called `a` that allow you to create an object of that type. They get the parameters and validate them and return an object of that type.
+For example, if you want to create a keyboard with two buttons one saying `A` and other saying `B` this is how you create it:
+```python
+keyboard = ReplyKeyboardMarkup.a(keyboard=[
+    [KeyboardButton.a(text='A'), KeyboardButton.a(text='B')]
+])
+```
+
+All `Type` classes also have a `to_dict` and `to_json` method that may help you in some scenarios. For more information see the package docs.
+
+<hr>
+
+### Final Notes
+* As explained earlier, some API methods have certain requirements for some of their parameters. One of them is the `reply_markup` parameter for all of the methods that have it.
+This parameter should be passed as a JSON object. However, since it is a very common parameter to use in a lot of methods, if you pass this as a `Type` (e.g. `ReplyKeyboardMarkup` or `InlineKeyboardMarkup`) 
+it will be converted to JSON automatically.
+* To send a file when using methods that accept it (such as `sendPhoto` or `sendDocument`), if you are going to upload the file (and not providing the file url or file id), set the `upload` argument to `True` and pass the opened file to the according argument. For example:
+`bot.sendPhoto(chat_id, photo=open('my_file.png', 'rb'), upload=True)`
+
+
+### Links
+* A demo bot created with `django-tgbot`: [https://github.com/ARKhoshghalb/django-tgbot_demo](https://github.com/ARKhoshghalb/django-tgbot_demo)  
+* Full documentation: [https://django-tgbot.readthedocs.io/en/latest/](https://django-tgbot.readthedocs.io/en/latest/)
