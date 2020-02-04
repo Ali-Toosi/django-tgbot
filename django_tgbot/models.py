@@ -66,7 +66,7 @@ class AbstractTelegramUser(models.Model):
 
 class AbstractTelegramState(models.Model):
     memory = models.TextField(null=True, blank=True, verbose_name="Memory in JSON format")
-    waiting_for = models.CharField(max_length=256, null=True, blank=True)
+    name = models.CharField(max_length=256, null=True, blank=True)
 
     class Meta:
         abstract = True
@@ -98,6 +98,12 @@ class AbstractTelegramState(models.Model):
         except ValueError:
             pass
 
+    def reset_memory(self):
+        """
+        Resets memory
+        """
+        self.set_memory({})
+
     def update_memory(self, obj):
         """
         Updates the memory in the exact way a Python dictionary is updated. New keys will be added and
@@ -110,3 +116,6 @@ class AbstractTelegramState(models.Model):
         memory.update(obj)
         self.set_memory(memory)
 
+    def set_name(self, name):
+        self.name = name
+        self.save()

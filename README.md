@@ -165,4 +165,5 @@ def say_hello(bot, update, state):
 
 Please note that leaving the `success` and `fail` parameters is NOT the same as setting them to `state_types.Keep`. Leaving them will not change them and allows you to set them in the processor's run time. However, setting them to `state_types.Keep` will force the state to be the same as what is was before entering the processor.
 
-Full documentation accessible from [https://django-tgbot.readthedocs.io/en/latest/](https://django-tgbot.readthedocs.io/en/latest/)
+A demo bot created with `django-tgbot`: [https://github.com/ARKhoshghalb/django-tgbot_demo](https://github.com/ARKhoshghalb/django-tgbot_demo)  
+Full documentation: [https://django-tgbot.readthedocs.io/en/latest/](https://django-tgbot.readthedocs.io/en/latest/)

@@ -2,6 +2,7 @@
 
 from django.db import migrations, models
 import django.db.models.deletion
+from .. import app_name
 
 
 class Migration(migrations.Migration):
@@ -44,9 +45,9 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('memory', models.TextField(blank=True, null=True, verbose_name='Memory in JSON format')),
-                ('waiting_for', models.CharField(blank=True, max_length=256, null=True)),
-                ('telegram_chat', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='telegram_states', to='employdevbot.TelegramChat')),
-                ('telegram_user', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='telegram_states', to='employdevbot.TelegramUser')),
+                ('name', models.CharField(blank=True, max_length=256, null=True)),
+                ('telegram_chat', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='telegram_states', to='{}.TelegramChat'.format(app_name))),
+                ('telegram_user', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='telegram_states', to='{}.TelegramUser'.format(app_name))),
             ],
             options={
                 'unique_together': {('telegram_user', 'telegram_chat')},

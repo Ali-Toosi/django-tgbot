@@ -1,2 +1,3 @@
-All = '_ALL_STATES'
-Keep = '_KEEP_THE_WAITING_FOR'
+All = '__ALL_STATES'
+Keep = '__KEEP_THE_STATE_NAME'
+Reset = '__RESET_STATE'

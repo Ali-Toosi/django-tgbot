@@ -68,7 +68,7 @@ class Command(BaseCommand):
                 return
 
         with open(os.path.join(dst, '__init__.py'), 'w') as f:
-            f.write("bot_token = '{}'".format(bot_token))
+            f.write("# Do not remove these 2 lines:\nbot_token = '{}'\napp_name='{}'".format(bot_token, bot_username))
 
         self.stdout.write(self.style.SUCCESS('Successfully created bot {}(@{}).'.format(bot_name, bot_username)))
 

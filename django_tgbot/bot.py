@@ -1,5 +1,3 @@
-from typing import Optional
-
 from django_tgbot.bot_api_user import BotAPIUser
 from django_tgbot.types.update import Update
 
