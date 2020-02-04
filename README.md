@@ -69,13 +69,13 @@ Enjoy!
 
 This is an overview of the flow:
 
-Bot receives a message/update --> Telegram sends an Update to your webhook --> Django receives this request and passes it to the app created for this bot (In steps above) --> `django_tgbot` creates an `Update` object from the HTTP request --> One or several `processor`s will be assigned to handle this `Update` --> All of these `processor`s run and possibly make some calls to Telegram API.
+Bot receives a message/update --> Telegram sends an Update to your webhook --> Django receives this request and passes it to the app created for this bot (In steps above) --> `django_tgbot` creates an `Update` object from the HTTP request --> One or several `processor`s will be assigned to handle this `Update` --> All of these `processor`s will run and possibly make some calls to Telegram API.
 
 #### Types
-Telegram uses some methods and `Type`s (read classes) to handle everything. All of these types are implemented as Python classes and you can use them from `django_tgbot.types`. You can view a full list of all Telegram available types [here](https://core.telegram.org/bots/api#available-types) (The API version based on which this package is designed is written at the top of this document. With newer versions there might be new types not implemented in this package)
+Telegram uses some methods and `Type`s (think of this types as classes) to handle everything. All of these types are implemented as Python classes and you can use them from `django_tgbot.types`. You can view a full list of all Telegram available types [here](https://core.telegram.org/bots/api#available-types) (The API version based on which this package is designed is written at the top of this document. With newer versions there might be new types not implemented in this package)
 
 #### Models
-With every new bot you create come 3 models:
+Each new bot you create comes prepackaged with 3 models:
 * <b>TelegramUser</b>: represents a user in Telegram. Can be a person or a bot. Basically, it is an entity that can send messages.
 * <b>TelegramChat</b>: represents a chat in Telegram. Can be a private chat, a group, a supergroup or a channel. Basically, it is a place that messages can be sent from one or several parties.
 * <b>TelegramState</b>: From the bot's perspective, each user in a chat or a chat by itself or a user by itself, are in a state. This state is stored in `TelegramState` model. It holds the user (can be blank), the chat (can be blank), a memory and a name. This name helps the bot to easily determine what this state is and what needs to be done.
@@ -95,7 +95,7 @@ So far, we have seen every client of our bot (a user with/without a chat or a ch
 
 Each processor should declare the states from which clients can enter and the state to which clients should be sent in case processor ran successfully or in case it failed.
 
-Processors are just Python functions that take as input the bot instance, the update received from Telegram and the state of the client.
+Processors are just Python functions that take the bot instance, the update received from Telegram and the state of the client as input.
 
 
 <hr>
@@ -127,7 +127,7 @@ As said earlier, each processor should declare what states it accept to process 
 
 These are declared above the function definition in the `@processor` arguments:
 * <b>state_names</b>: Name of the accepting states for this processor. It can be a <i>string</i>, a <i>list</i> or `state_types.All` which will accept all states. If you want to accept the empty state (the client's state is initially empty and it's a good idea to use empty string as a reset state), leave it or set it as `state_names = ''`.
-* <b>success</b>: The new state of the client, if processor runs successfully. Here successfully means being run without raising `ProcessFailure` exception.
+* <b>success</b>: The new state of the client, if processor runs successfully. "successfully" means being run without raising `ProcessFailure` exception.
 * <b>fail</b>: The new state of the client, if processor fails to run. If you want to fail the processor you should raise `ProcessFailure`. This exception can be imported from `django_tgbot.exceptions`.
 
 You may use `state_types.Keep` as the value for `success` or `fail` to not change the state or use `state_types.Reset` to reset the state (equivalent as saying `success = ''`).
@@ -138,7 +138,7 @@ Additionally, you can define the update types and the message types you want thi
 * <b>update_types</b>: Can be a single value or a list of values. Leave unfilled to accept any update type. Like the message_updates, available update_types are accessible from the `update_types` module. For example, `update_types = [update_types.ChannelPost, update_types.EditedMessage]` makes the processor handle only updates about a new post being sent to a channel or a message being edited.
 * <b>exclude_update_types</b>: Works exactly like `update_types` except that values passed here will be excluded from the acceptable update types to handle.
 
-Please note that the first parameter for `@processor` should be always an state manager. An state manager is created automatically when you create a new bot and it's imported in the processors module. You can use that and give it to all of the processors. You may change this state manager for having different behaviors in your bot, which is not a common case and will be explained in advanced documentations.
+Please note that the first parameter for `@processor` should be always an state manager. An state manager is created automatically when you create a new bot and it's imported in the processors module. You can use that and give it to all of the processors. You may change this state manager to have different behaviors in your bot, which is not a common case and will be explained in advanced documentations.
 
 Example of a processor definition:
 ```python
@@ -163,7 +163,7 @@ def say_hello(bot, update, state):
         state.save()
 ```
 
-Please note that leaving the `success` and `fail` parameters is NOT the same as setting them to `state_types.Keep`. Leaving them will not change them and allows you to set them in the processor's run time. However, setting them to `state_types.Keep` will force the state to be the same as what is was before entering the processor.
+Please note that leaving the `success` and `fail` parameters without a value is NOT the same as setting them to `state_types.Keep`. Leaving them will not change them and allows you to set them in the processor's run time. However, setting them to `state_types.Keep` will force the state to be the same as what is was before entering the processor.
 
 ### Using the API methods
 
