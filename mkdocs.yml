@@ -1,0 +1,16 @@
+site_name: My Docs
+
+nav:
+    - Home: index.md
+    - Creating bots: createtgbot.md
+    - Processors: processors.md
+    - Types:
+        - What is a type?: types/README.md
+        - Update type: types/update.md
+        - Message type: types/message.md
+        - ReplyKeyboardMarkup type: types/replykeyboardmarkup.md
+    - Models:
+        - Telegram User: models/telegram_user.md
+        - Telegram Chat: models/telegram_chat.md
+        - Telegram State: models/telegram_state.md
+theme: readthedocs

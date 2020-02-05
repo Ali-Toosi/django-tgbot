@@ -6,9 +6,9 @@ Bot API version 4.6 ([Telegram bot API docs](https://core.telegram.org/bots/api)
 ### Quick Setup
 
 1. Install package from pip:  
-```
-pip install django-tgbot
-```
+    ```
+    pip install django-tgbot
+    ```
 
 2. Add `django_tgbot` to your Django project's `INSTALLED_APPS`
 
@@ -17,31 +17,31 @@ That's it :) You installed django-tgbot.
 <hr>
 
 ### Create a new Telegram bot
-1. Create a bot in Telegram using [BotFather](https://t.me/BotFather) and recieve your API token
+1. Create a bot in Telegram using [BotFather](https://t.me/BotFather) and receive your API token
 2. Open the Django project with `django-tgbot` installed in it
 3. Enter this command in the command line (terminal / cmd):
-```
-python manage createtgbot
-```
+    ```
+    python manage createtgbot
+    ```
 4. Enter your API token:
-```
-> python manage.py createtgbot
-Enter the bot token (retrieved from BotFather): <YOUR_TOKEN>
-Setting up @BotDevTestBot ...
-```
+    ```
+    > python manage.py createtgbot
+    Enter the bot token (retrieved from BotFather): <YOUR_TOKEN>
+    Setting up @BotDevTestBot ...
+    ```
 5. Enter the URL your Django project is deployed on. If your project is not deployed yet and is not accessible, press Enter to skip. (If you have not deployed yet and want to test your bot, you can use services like [Ngrok](http://ngrok.com) to do so)
-```
-Enter the url of this project to set the webhook (Press Enter to skip): https://URL.com
-Bot webhook will be set to https://URL.com/botdevtestbot/update/. Do you confirm? (Y/N): y
-Webhook was successfully set.
-```
+    ```
+    Enter the url of this project to set the webhook (Press Enter to skip): https://URL.com
+    Bot webhook will be set to https://URL.com/botdevtestbot/update/. Do you confirm? (Y/N): y
+    Webhook was successfully set.
+    ```
 
 6. A new app will be created in your Django project. Add this app to your `INSTALLED_APPS`
 7. Include this new app's urls in your project urls as described in the output of the above command
 8. Update the database:
-```
-python manage.py migrate
-```
+    ```
+    python manage.py migrate
+    ```
 
 Your bot is created! If you have set the webhook correctly you can now send messages to your bot and it responds all messages with `Hello!`.
 
@@ -66,6 +66,8 @@ Enjoy!
 <hr>
 
 ### Definitions
+<b>It is important to understand these definitions in order to read the rest of the doc or to use the package. We encourage you to also read the 
+<i>Definitions</i> section in the full documentations. You can find a link to the full documentations at the end of this document.</b>
 
 This is an overview of the flow:
 
