@@ -51,7 +51,7 @@ class Message(BasicType):
             'venue': message_types.Venue,
             'poll': message_types.Poll,
             'new_chat_members': message_types.NewChatMembers,
-            'left_chat_members': message_types.LeftChatMembers,
+            'left_chat_member': message_types.LeftChatMember,
             'new_chat_title': message_types.NewChatTitle,
             'new_chat_photo': message_types.NewChatPhoto,
             'delete_chat_photo': message_types.DeleteChatPhoto,
