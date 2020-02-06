@@ -4,6 +4,9 @@ This package can be used to have [Telegram Bots](https://core.telegram.org/bots)
  It is designed in a way allowing you to have multiple number of bots in the same project.
 
 Telegram Bot API version: 4.6 
+
+![demo](img/code_and_bot.jpg)
+
  
 ## Setup
 1. Install package from pip:  

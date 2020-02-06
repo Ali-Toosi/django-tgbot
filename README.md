@@ -3,6 +3,8 @@
 
 Bot API version 4.6 ([Telegram bot API docs](https://core.telegram.org/bots/api))
 
+![demo](img/code_and_bot.jpg)
+
 ### Quick Setup
 
 1. Install package from pip:  
