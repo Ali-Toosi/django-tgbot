@@ -78,7 +78,7 @@ will be responsible for storing all of the processors and checking their conditi
 * **from_states**: This argument is to check the first condition from the list above. It takes a list or a single string and when
 a new update arrives, it will check to see if the state name is one of state names accepted by this processor. Special values:
     * If you want to accept updates with all state names, pass **state_types.All**
-    * If you want to accept updates with reset states (i.e. empty state names), leave blank or pass an empty string
+    * If you want to accept updates with reset states (i.e. empty state names), leave blank or pass an empty string or pass **state_types.Reset**
 * **update_types**: This argument is to check the second condition from the list above. It takes a list or a single value and
 checks the type of the received update. Use the predefined [update types](types/update.md) to fill this argument. For example, you can pass
 `[update_types.Message, update_types.EditedMessage]` to catch messages and edited messages or `update_types.ChannelPost` to get only channel posts.

@@ -128,11 +128,11 @@ Initially, there is a `hello_world` processor available in `processors.py`. As y
 As said earlier, each processor should declare what states it accept to process and if processing was done successfully, what should the client's state become and what should it become if the processing fails.
 
 These are declared above the function definition in the `@processor` arguments:
-* <b>state_names</b>: Name of the accepting states for this processor. It can be a <i>string</i>, a <i>list</i> or `state_types.All` which will accept all states. If you want to accept the empty state (the client's state is initially empty and it's a good idea to use empty string as a reset state), leave it or set it as `state_names = ''`.
+* <b>from_states</b>: Name of the accepting states for this processor. It can be a <i>string</i>, a <i>list</i> or `state_types.All` which will accept all states. If you want to accept the empty (reset) state (the client's state is initially empty and it's a good idea to use empty string as a reset state), leave it blank or set it as `from_states = ''` or `from_states = state_types.Reset`.
 * <b>success</b>: The new state of the client, if processor runs successfully. "successfully" means being run without raising `ProcessFailure` exception.
 * <b>fail</b>: The new state of the client, if processor fails to run. If you want to fail the processor you should raise `ProcessFailure`. This exception can be imported from `django_tgbot.exceptions`.
 
-You may use `state_types.Keep` as the value for `success` or `fail` to not change the state or use `state_types.Reset` to reset the state (equivalent as saying `success = ''`).
+You may use `state_types.Keep` as the value for `success` or `fail` to not change the state or use `state_types.Reset` to reset the state.
 
 Additionally, you can define the update types and the message types you want this processor to handle. For example, you may want to have a processor that only handles requests regarding a message getting edited (which is a different update type than receiving a new message) or you may want to have a processor only handling requests of video messages (which is a different message type than text messages). To see a full list of different updates types and message types read Telegram Bot API docs. Parameters for `@processor`:
 * <b>message_types</b>: Can be a single value or a list of values. Leave unfilled to accept any message type. Use values from `message_types` module to fill in the parameter. For example you can say `message_types = message_types.Text` to only handle text messages or `message_types = [message_types.NewChatMembers, message_types.LeftChatMembers]` to handle updates about group members coming and going.

@@ -16,7 +16,7 @@ class TransitionCondition:
         if update_types in ['all', '*', state_types.All]:
             update_types = None
 
-        if from_states is None:
+        if from_states is None or from_states == state_types.Reset:
             from_states = ['', None]
         elif from_states in ['*', state_types.All]:
             from_states = ['*']
