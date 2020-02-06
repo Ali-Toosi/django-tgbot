@@ -3,7 +3,7 @@
 
 Bot API version 4.6 ([Telegram bot API docs](https://core.telegram.org/bots/api))
 
-![demo](img/code_and_bot.jpg)
+![demo](docs/img/code_and_bot.jpg)
 
 ### Quick Setup
 
