@@ -1,16 +1,20 @@
-site_name: My Docs
+site_name: django-tgbot
 
 nav:
     - Home: index.md
-    - Creating bots: createtgbot.md
+    - Creating bots: management_commands/createtgbot.md
     - Processors: processors.md
     - Types:
-        - What is a type?: types/README.md
-        - Update type: types/update.md
-        - Message type: types/message.md
-        - ReplyKeyboardMarkup type: types/replykeyboardmarkup.md
+        - What's a type?: types/README.md
+        - Update: types/update.md
+        - Message: types/message.md
+        - ReplyKeyboardMarkup: types/replykeyboardmarkup.md
     - Models:
         - Telegram User: models/telegram_user.md
         - Telegram Chat: models/telegram_chat.md
         - Telegram State: models/telegram_state.md
+    - Management Commands:
+        - createtgbot: management_commands/createtgbot.md
+        - tgbottoken: management_commands/tgbottoken.md
+        - tgbotwebhook: management_commands/tgbotwebhook.md
 theme: readthedocs
