@@ -1,3 +1,4 @@
+[![Documentation Status](https://readthedocs.org/projects/django-tgbot/badge/?version=latest)](https://django-tgbot.readthedocs.io/en/latest/?badge=latest)
 
 # Telegram Bots in Django
 
