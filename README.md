@@ -5,7 +5,7 @@ Bot API version 4.6 ([Telegram bot API docs](https://core.telegram.org/bots/api)
 
 ![demo](docs/img/code_and_bot.jpg)
 
-### Quick Setup
+### Setup
 
 1. Install package from pip:  
     ```
@@ -204,5 +204,5 @@ it will be converted to JSON automatically.
 
 
 ### Links
-* A demo bot created with `django-tgbot`: [https://github.com/ARKhoshghalb/django-tgbot_demo](https://github.com/ARKhoshghalb/django-tgbot_demo)  
+* Some demo bots created with `django-tgbot`: [https://github.com/Ali-Toosi/django-tgbot_demo](https://github.com/Ali-Toosi/django-tgbot_demo)  
 * Full documentation: [https://django-tgbot.readthedocs.io/en/latest/](https://django-tgbot.readthedocs.io/en/latest/)
