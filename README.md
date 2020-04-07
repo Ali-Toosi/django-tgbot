@@ -4,6 +4,10 @@
 
 Bot API version 4.6 ([Telegram bot API docs](https://core.telegram.org/bots/api))
 
+Please note that all types and methods implemented here are defined exactly as they have been in [Telegram Bot API](https://core.telegram.org/bots/api). This means, although some type annotations
+and method comments have been provided in this package, you can find additional explanations for all types and methods on Telegram Bot API docs and use them in this package exactly the same way.
+
+
 ![demo](docs/img/code_and_bot.jpg)
 
 ### Setup
