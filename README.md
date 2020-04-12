@@ -1,4 +1,7 @@
 [![Documentation Status](https://readthedocs.org/projects/django-tgbot/badge/?version=latest)](https://django-tgbot.readthedocs.io/en/latest/?badge=latest)
+[![Bot API Version](https://img.shields.io/badge/Bot%20API-v4.6-blue)](https://core.telegram.org/bots/api)
+[![Community Chat](https://img.shields.io/badge/Community-Chat-blueChat?style=flat-square&logo=telegram)](https://t.me/DjangoTGBotChat)
+
 
 # Telegram Bots in Django
 
