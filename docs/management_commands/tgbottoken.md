@@ -6,7 +6,7 @@ Another management command encapsulated in this package is `tgbottoken`. This co
 1. Open the Django project with `django-tgbot` installed in it
 2. Enter this command in the command line (terminal / cmd):  
     
-        python manage tgbottoken
+        python manage.py tgbottoken
 
 3. Enter the username for the bot you want to modify (without @):
 

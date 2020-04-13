@@ -9,7 +9,7 @@ This app created for a new bot you create will be a simple bot that responds to 
 2. Open the Django project with `django-tgbot` installed in it
 3. Enter this command in the command line (terminal / cmd):  
     
-        python manage createtgbot
+        python manage.py createtgbot
     
 4. Enter your API token:  
     
