@@ -14,7 +14,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         bot_username = input('Enter the username of the bot (without @): ').lower()
         dst = os.path.join(settings.BASE_DIR, bot_username)
-        init_file = os.path.join(dst, '__init__.py')
+        init_file = os.path.join(dst, 'credentials.py')
 
         if not os.path.isfile(init_file):
             self.stdout.write(
@@ -22,11 +22,12 @@ class Command(BaseCommand):
             )
             return
 
-        spec = importlib.util.spec_from_file_location("__init__", init_file)
+        # spec = importlib.util.spec_from_file_location("__init__", init_file)
+        spec = importlib.util.spec_from_file_location("credentials", init_file)
         init_module = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(init_module)
 
-        bot_token = init_module.bot_token
+        bot_token = init_module.BOT_TOKEN
 
         again = True
         while again:
