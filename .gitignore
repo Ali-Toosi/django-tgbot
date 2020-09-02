@@ -12,3 +12,6 @@ __pycache__/
 .LSOverride
 site/
 release
+.vscode
+config.py
+db.sqlite3
