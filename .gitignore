@@ -13,5 +13,4 @@ __pycache__/
 site/
 release
 .vscode
-config.py
 db.sqlite3
