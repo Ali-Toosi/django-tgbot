@@ -14,20 +14,19 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         bot_username = input('Enter the username of the bot (without @): ').lower()
         dst = os.path.join(settings.BASE_DIR, bot_username)
-        init_file = os.path.join(dst, 'credentials.py')
+        credentials_file = os.path.join(dst, 'credentials.py')
 
-        if not os.path.isfile(init_file):
+        if not os.path.isfile(credentials_file):
             self.stdout.write(
                 self.style.ERROR('No such bot found. Make sure you have created your bot with command `createtgbot`.')
             )
             return
 
-        # spec = importlib.util.spec_from_file_location("__init__", init_file)
-        spec = importlib.util.spec_from_file_location("credentials", init_file)
-        init_module = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(init_module)
+        spec = importlib.util.spec_from_file_location("credentials", credentials_file)
+        credentials_module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(credentials_module)
 
-        bot_token = init_module.BOT_TOKEN
+        bot_token = credentials_module.BOT_TOKEN
 
         again = True
         while again:
