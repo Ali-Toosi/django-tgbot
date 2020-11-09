@@ -36,8 +36,13 @@ class Command(BaseCommand):
                 self.stdout.write(self.style.ERROR("Couldn't copy bot files."))
                 return
 
+        with open(os.path.join(dst, 'credentials.py'), 'w') as f:
+            f.write("# Do not remove these 2 lines:\nBOT_TOKEN = '{}'\nAPP_NAME = '{}'\n".format(bot_token, bot_username))
+
         with open(os.path.join(dst, '__init__.py'), 'w') as f:
-            f.write("# Do not remove these 2 lines:\nbot_token = '{}'\napp_name='{}'\n".format(bot_token, bot_username))
+            f.write(
+                "from . import credentials\n\n\nbot_token = credentials.BOT_TOKEN\napp_name = credentials.APP_NAME\n"
+            )
 
         self.stdout.write(self.style.SUCCESS('Successfully created bot {}(@{}).'.format(bot_name, bot_username)))
 
