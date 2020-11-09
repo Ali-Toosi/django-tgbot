@@ -24,9 +24,9 @@ class StateManager:
         update_type = update.type()
         state_name = state.name
         processors = []
-        for state in self.handling_states.keys():
-            if state.matches(state_name=state_name, update_type=update_type, message_type=message_type):
-                processors.append(self.handling_states[state])
+        for handling_state in self.handling_states.keys():
+            if handling_state.matches(state_name=state_name, update_type=update_type, message_type=message_type):
+                processors.append(self.handling_states[handling_state])
         return processors
 
     def set_default_message_types(self, message_types):

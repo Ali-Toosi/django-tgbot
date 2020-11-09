@@ -1,3 +1,5 @@
+from typing import Optional
+
 from django_tgbot.state_manager import update_types
 from django_tgbot.types import chat
 from . import BasicType
@@ -42,13 +44,16 @@ class Update(BasicType):
                 return field_checks[key]
         return None
 
-    def get_message(self) -> message.Message or None:
+    def get_update_id(self) -> str:
+        return getattr(self, 'update_id')
+
+    def get_message(self) -> Optional[message.Message]:
         for key in ['message', 'edited_message', 'channel_post', 'edited_channel_post']:
             if getattr(self, key, None) is not None:
                 return getattr(self, key, None)
         return None
 
-    def get_chat(self) -> chat.Chat or None:
+    def get_chat(self) -> Optional[chat.Chat]:
         if self.get_message() is not None:
             return self.get_message().get_chat()
         if self.is_callback_query():
@@ -90,20 +95,20 @@ class Update(BasicType):
     def get_poll_answer(self) -> pollanswer.PollAnswer:
         return getattr(self, 'poll_answer', None)
 
-    def is_poll_answer(self):
+    def is_poll_answer(self) -> bool:
         return self.get_poll_answer() is not None
 
-    def is_pre_checkout_query(self):
+    def is_pre_checkout_query(self) -> bool:
         return self.get_pre_checkout_query() is not None
 
-    def is_chosen_inline_result(self):
+    def is_chosen_inline_result(self) -> bool:
         return self.get_chosen_inline_result() is not None
 
-    def is_inline_query(self):
+    def is_inline_query(self) -> bool:
         return self.get_inline_query() is not None
 
-    def is_callback_query(self):
+    def is_callback_query(self) -> bool:
         return self.get_callback_query() is not None
 
-    def is_shipping_query(self):
+    def is_shipping_query(self) -> bool:
         return self.get_shipping_query() is not None

@@ -9,7 +9,7 @@ import importlib.util
 
 
 class Command(BaseCommand):
-    help = 'Updates the webhook for an existing tgbot'
+    help = 'Updates the webhook address for an existing tgbot'
 
     def handle(self, *args, **options):
         bot_username = input('Enter the username of the bot (without @): ').lower()
@@ -31,8 +31,8 @@ class Command(BaseCommand):
         again = True
         while again:
             choice = input("Please choose from the options:\n"
-                           " 1. I want to change the project URL and use default webhooks\n"
-                           " 2. I want to set a custom webhook URL for this bot\n")
+                           " 1. Set the project URL and use default webhooks\n"
+                           " 2. Set a custom webhook address for this bot\n")
             try:
                 if int(choice) == 1:
                     helpers.prompt_project_url(self, bot_token, bot_username)
