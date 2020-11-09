@@ -13,8 +13,8 @@ class TelegramChat(AbstractTelegramChat):
 
 
 class TelegramState(AbstractTelegramState):
-    telegram_user = models.ForeignKey(TelegramUser, related_name='telegram_states', on_delete=CASCADE)
-    telegram_chat = models.ForeignKey(TelegramChat, related_name='telegram_states', on_delete=CASCADE)
+    telegram_user = models.ForeignKey(TelegramUser, related_name='telegram_states', on_delete=CASCADE, blank=True, null=True)
+    telegram_chat = models.ForeignKey(TelegramChat, related_name='telegram_states', on_delete=CASCADE, blank=True, null=True)
 
     class Meta:
         unique_together = ('telegram_user', 'telegram_chat')
