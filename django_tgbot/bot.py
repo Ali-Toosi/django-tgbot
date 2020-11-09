@@ -46,6 +46,19 @@ class AbstractTelegramBot(BotAPIUser):
             state=db_state
         )
 
+    def poll_updates_and_handle(self):
+        updates = self.getUpdates()
+        offset = None
+        total_count = 0
+        while len(updates) > 0:
+            total_count += len(updates)
+            for update_json in updates:
+                update = Update(update_json)
+                self.handle_update(update)
+                offset = int(update.get_update_id()) + 1
+            updates = self.getUpdates(offset=offset)
+        return total_count
+
     def pre_processing(self, update: Update, user, db_user, chat, db_chat, state):
         if db_user is not None:
             db_user.first_name = user.get_first_name()

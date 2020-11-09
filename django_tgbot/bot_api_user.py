@@ -1,10 +1,11 @@
-from typing import Union
+from typing import Union, List
 
 import requests
 import time
 import json
 import inspect
 
+from django_tgbot.exceptions import BotAPIRequestFailure
 from django_tgbot.types.chat import Chat
 from django_tgbot.types.chatmember import ChatMember
 from django_tgbot.types.file import File
@@ -15,6 +16,7 @@ from django_tgbot.types.poll import Poll
 from django_tgbot.types.replykeyboardmarkup import ReplyKeyboardMarkup
 from django_tgbot.types.replykeyboardremove import ReplyKeyboardRemove
 from django_tgbot.types.stickerset import StickerSet
+from django_tgbot.types.update import Update
 from django_tgbot.types.user import User
 from django_tgbot.types.userprofilephotos import UserProfilePhotos
 
@@ -41,6 +43,9 @@ def create_params_from_args(args=None, exclude=None):
             result[arg] = args[arg]
 
         if arg == 'reply_markup' and type(result[arg]) != str:
+            result[arg] = json.dumps(result[arg])
+
+        if (type(result[arg])) == list:
             result[arg] = json.dumps(result[arg])
 
     return result
@@ -114,8 +119,20 @@ class BotAPIUser:
     def getMe(self) -> User:
         return self.request_and_result(create_params_from_args(), User)
 
-    def getUpdates(self):
-        pass   # TODO
+    def getUpdates(self, offset=None, limit=100, timeout=0, allow_updates=None) -> list:
+        """
+        Returns a list of UNPARSED updates. The json objects in the list should still be sent to Update class to become
+        Update objects.
+        :param offset: The update_id of the first update you wish to receive
+        :param limit: The number of updates returned
+        :param timeout: Timeout in seconds for long polling.
+        :param allow_updates: List of the update types you want your bot to receive. Can be either a list of JSON string
+        :return: a list of json updates
+        """
+        updates = self.request_and_result(create_params_from_args(locals()), list)
+        if type(updates) == dict and not updates['ok']:
+            raise BotAPIRequestFailure(f"Error code {updates['error_code']} ({updates['description']})")
+        return updates
 
     def setWebhook(self, url):
         return self.send_request('setWebhook', {'url': url})

@@ -25,3 +25,12 @@ def handle_bot_request(request):
         else:
             logging.exception(e)
     return HttpResponse("OK")
+
+
+def poll_updates(request):
+    """
+    Polls all waiting updates from the server. Note that webhook should not be set if polling is used.
+    You can delete the webhook by passing an empty URL as the address.
+    """
+    count = bot.poll_updates_and_handle()
+    return HttpResponse(f"Processed {count} update{'' if count == 1 else 's'}.")
