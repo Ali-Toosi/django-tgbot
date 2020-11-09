@@ -4,6 +4,7 @@ nav:
     - Home: index.md
     - Creating bots: management_commands/createtgbot.md
     - Processors: processors.md
+    - Getting Updates: getting_updates.md
     - Types:
         - What's a type?: types/README.md
         - Update: types/update.md

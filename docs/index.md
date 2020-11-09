@@ -44,4 +44,4 @@ information. A **processor** is a function that takes these 3 object (namely the
 to an update in whatever way they want. They can modify the state, they can send a message to this client or they can do nothing. Please read full documentation
 of **processors** from [here](processors.md).
 
-<b>Let's have a look at how to [Create a new bot with django-tgbot](createtgbot.md) next.</b>
+<b>Let's have a look at how to [Create a new bot with django-tgbot](management_commands/createtgbot.md) next.</b>

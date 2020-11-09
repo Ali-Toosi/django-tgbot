@@ -10,7 +10,7 @@ for helping the bot to handle updates. These auxiliary data are:
 
 * `telegram_user`: The user (either a person or a bot) this state belongs to. This field can be null (will be explained later in this document).
 * `telegram_chat`: The chat (private, group, supergroup or channel) this state belongs to. This field can be null (which will be explained later in this document).
-* `name`: The state that this client / chat currently have can be named so the bot can recognize it easier. This is basically how the bot
+* `name`: The state that this client / chat currently has can be named so the bot can recognize it easier. This is basically how the bot
 handles the state. It sets a name for the state of this client / chat and it knows what to do when another update comes at a later time. Again,
 after processing that update, if it needs to move the user to another state, it will change this name. You can set this name by accessing it directly
 or you may use the `set_name` method:

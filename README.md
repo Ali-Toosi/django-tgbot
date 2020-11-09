@@ -135,7 +135,7 @@ Initially, there is a `hello_world` processor available in `processors.py`. As y
 * <b>update</b>: The received update loaded into the `Update` type explained above.
 * <b>state</b>: The state of this client, a TelegramState instance. You can change their state or memory using this.
 
-As said earlier, each processor should declare what states it accept to process and if processing was done successfully, what should the client's state become and what should it become if the processing fails.
+As said earlier, each processor should declare what states it accepts to process and if processing is done successfully, what should the client's state become and what should it become if the processing fails.
 
 These are declared above the function definition in the `@processor` arguments:
 * <b>from_states</b>: Name of the accepting states for this processor. It can be a <i>string</i>, a <i>list</i> or `state_types.All` which will accept all states. If you want to accept the empty (reset) state (the client's state is initially empty and it's a good idea to use empty string as a reset state), leave it blank or set it as `from_states = ''` or `from_states = state_types.Reset`.

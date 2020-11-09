@@ -63,6 +63,6 @@ the core processing unit of your bot. The latter is an interface for working wit
 
 <b>Continue to:</b>
 
-* [The Bot class](classes/bot.md)
-* [Processors](processors.md) 
+* [The Bot class](../classes/bot.md)
+* [Processors](../processors.md) 
 
