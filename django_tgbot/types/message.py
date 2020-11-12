@@ -105,6 +105,7 @@ from . import user, chat, messageentity, audio, document, animation, game, photo
 
 Message.fields.update({
     'reply_to_message': Message,
+    'via_bot': user.User,
     'pinned_message': Message,
     'from': user.User,
     'chat': chat.Chat,
