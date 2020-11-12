@@ -13,6 +13,7 @@ from django_tgbot.types.file import File
 from django_tgbot.types.forcereply import ForceReply
 from django_tgbot.types.inlinekeyboardmarkup import InlineKeyboardMarkup
 from django_tgbot.types.message import Message
+from django_tgbot.types.messageentity import MessageEntity
 from django_tgbot.types.poll import Poll
 from django_tgbot.types.replykeyboardmarkup import ReplyKeyboardMarkup
 from django_tgbot.types.replykeyboardremove import ReplyKeyboardRemove
@@ -315,9 +316,16 @@ class BotAPIUser:
         return self.request_and_result(create_params_from_args(locals()), Message)
 
     def sendPoll(self, chat_id, question, options, is_anonymous=None, type=None, allows_multiple_answers=None,
-                 correct_option_id=None, is_closed=None, disable_notification=None, reply_to_message_id=None,
+                 correct_option_id: int = None, explanation: str = None, explanation_parse_mode: str = None,
+                 explanation_entities: List[MessageEntity] = None, open_period: int = None, close_date: int = None,
+                 is_closed=None, disable_notification=None,
+                 reply_to_message_id=None,
                  reply_markup: Union[
                      None, InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply] = None) -> Message:
+
+        if open_period is not None and close_date is not None:
+            raise APIInputError("Polls cannot use both open_period and close_date.")
+
         return self.request_and_result(create_params_from_args(locals()), Message)
 
     def sendChatAction(self, chat_id, action):
@@ -471,7 +479,8 @@ class BotAPIUser:
                 files=files
             )
 
-    def addStickerToSet(self, user_id, name, emojis, png_sticker=None, tgs_sticker=None, upload=False, mask_position=None):
+    def addStickerToSet(self, user_id, name, emojis, png_sticker=None, tgs_sticker=None, upload=False,
+                        mask_position=None):
         if png_sticker is not None and tgs_sticker is not None:
             raise APIInputError("Only one of png_sticker and tgs_sticker should be used.")
 
@@ -548,7 +557,5 @@ class BotAPIUser:
     def sendDice(
             self, chat_id, emoji=None, disable_notification=None, reply_to_message_id=None,
             allow_sending_without_reply=None, reply_markup: Union[
-                    None, InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply] = None):
+                None, InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply] = None):
         return self.request_and_result(create_params_from_args(locals()), Message)
-
-
