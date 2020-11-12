@@ -5,7 +5,7 @@ import time
 import json
 import inspect
 
-from django_tgbot.exceptions import BotAPIRequestFailure
+from django_tgbot.exceptions import BotAPIRequestFailure, APIInputError
 from django_tgbot.types.botcommand import BotCommand
 from django_tgbot.types.chat import Chat
 from django_tgbot.types.chatmember import ChatMember
@@ -446,27 +446,71 @@ class BotAPIUser:
 
     def createNewStickerSet(self, user_id, name, title, emojis, png_sticker=None, tgs_sticker=None, upload=False,
                             contains_masks=None, mask_position=None):
+        if png_sticker is not None and tgs_sticker is not None:
+            raise APIInputError("Only one of png_sticker and tgs_sticker should be used.")
+
+        if png_sticker is None and tgs_sticker is None:
+            raise APIInputError("You must use exactly one of png_sticker and tgs_sticker. They are both None.")
+
+        ignore_list = ['upload']
+        files = {}
+
+        if png_sticker is None:
+            ignore_list.append('png_sticker')
+            files['tgs_sticker'] = tgs_sticker
+        if tgs_sticker is None:
+            ignore_list.append('tgs_sticker')
+            files['png_sticker'] = png_sticker
+
         if not upload:
-            return self.request_and_result(create_params_from_args(locals(), ['upload']), bool)
+            return self.request_and_result(create_params_from_args(locals(), ignore_list), bool)
         else:
             return self.request_and_result(
-                create_params_from_args(locals(), ['upload', 'png_sticker']),
+                create_params_from_args(locals(), ['upload', 'png_sticker', 'tgs_sticker']),
                 bool,
-                files={'png_sticker': png_sticker}
+                files=files
             )
 
     def addStickerToSet(self, user_id, name, emojis, png_sticker=None, tgs_sticker=None, upload=False, mask_position=None):
+        if png_sticker is not None and tgs_sticker is not None:
+            raise APIInputError("Only one of png_sticker and tgs_sticker should be used.")
+
+        if png_sticker is None and tgs_sticker is None:
+            raise APIInputError("You must use exactly one of png_sticker and tgs_sticker. They are both None.")
+
+        ignore_list = ['upload']
+        files = {}
+
+        if png_sticker is None:
+            ignore_list.append('png_sticker')
+            files['tgs_sticker'] = tgs_sticker
+        if tgs_sticker is None:
+            ignore_list.append('tgs_sticker')
+            files['png_sticker'] = png_sticker
+
         if not upload:
-            return self.request_and_result(create_params_from_args(locals(), ['upload']), bool)
+            return self.request_and_result(create_params_from_args(locals(), ignore_list), bool)
         else:
             return self.request_and_result(
-                create_params_from_args(locals(), ['upload', 'png_sticker']),
+                create_params_from_args(locals(), ['upload', 'png_sticker', 'tgs_sticker']),
                 bool,
-                files={'png_sticker': png_sticker}
+                files=files
             )
 
     def setStickerPositionInSet(self, sticker, position):
         return self.request_and_result(create_params_from_args(locals()), bool)
+
+    def setStickerSetThumb(self, name: str, user_id, thumb=None, upload=False) -> bool:
+        if upload and thumb is None:
+            raise APIInputError("Param `upload` is True but no thumbnail is given.")
+        if not upload:
+            return self.request_and_result(create_params_from_args(locals(), ['upload']), bool)
+        else:
+            return self.request_and_result(
+                create_params_from_args(locals(), ['upload', 'thumb']),
+                bool,
+                files={'thumb': thumb}
+            )
 
     def deleteStickerFromSet(self, sticker):
         return self.request_and_result(create_params_from_args(locals()), bool)
