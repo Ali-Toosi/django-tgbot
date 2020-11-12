@@ -1,5 +1,5 @@
 from . import BasicType
-from . import sticker
+from . import sticker, photosize
 
 
 class StickerSet(BasicType):
@@ -11,7 +11,8 @@ class StickerSet(BasicType):
         'stickers': {
             'class': sticker.Sticker,
             'array': True
-        }
+        },
+        'thumb': photosize.PhotoSize
     }
 
     def __init__(self, obj=None):
