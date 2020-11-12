@@ -52,8 +52,7 @@ class AbstractTelegramBot(BotAPIUser):
         total_count = 0
         while len(updates) > 0:
             total_count += len(updates)
-            for update_json in updates:
-                update = Update(update_json)
+            for update in updates:
                 self.handle_update(update)
                 offset = int(update.get_update_id()) + 1
             updates = self.getUpdates(offset=offset)

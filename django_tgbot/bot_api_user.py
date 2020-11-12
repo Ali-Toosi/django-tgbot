@@ -109,17 +109,26 @@ class BotAPIUser:
     def request_and_result(self, data, result_type, files=None):
         """
         Should be called by a method with exact same name as the API method
+
+        :param result_type: can be either a type class or a list containing one type class which will parse
+            the result to be a list of that type. For example: Message if the result is a message or [Message] if the
+            result if a list of messages
         """
         res = self.send_request(inspect.stack()[1].function, data=data, files=files)
         if res['ok']:
-            return result_type(res['result'])
+            if type(result_type) == list and len(result_type) > 0:
+                if len(result_type) > 1:
+                    raise ValueError("Passed `result_type` cannot have more than one element if it is a list.")
+                return list(map(result_type[0], list(res['result'])))
+            else:
+                return result_type(res['result'])
         else:
             return res
 
     def getMe(self) -> User:
         return self.request_and_result(create_params_from_args(), User)
 
-    def getUpdates(self, offset=None, limit=100, timeout=0, allow_updates=None) -> list:
+    def getUpdates(self, offset=None, limit=100, timeout=0, allow_updates=None) -> List[Update]:
         """
         Returns a list of UNPARSED updates. The json objects in the list should still be sent to Update class to become
         Update objects.
@@ -129,7 +138,7 @@ class BotAPIUser:
         :param allow_updates: List of the update types you want your bot to receive. Can be either a list of JSON string
         :return: a list of json updates
         """
-        updates = self.request_and_result(create_params_from_args(locals()), list)
+        updates = self.request_and_result(create_params_from_args(locals()), [Update])
         if type(updates) == dict and not updates['ok']:
             raise BotAPIRequestFailure(f"Error code {updates['error_code']} ({updates['description']})")
         return updates
