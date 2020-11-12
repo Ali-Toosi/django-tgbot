@@ -444,8 +444,8 @@ class BotAPIUser:
         return self.request_and_result(create_params_from_args(locals(), ['png_sticker']), File,
                                        files={'png_sticker': png_sticker})
 
-    def createNewStickerSet(self, user_id, name, title, png_sticker, emojis, upload=False, contains_masks=None,
-                            mask_position=None):
+    def createNewStickerSet(self, user_id, name, title, emojis, png_sticker=None, tgs_sticker=None, upload=False,
+                            contains_masks=None, mask_position=None):
         if not upload:
             return self.request_and_result(create_params_from_args(locals(), ['upload']), bool)
         else:
