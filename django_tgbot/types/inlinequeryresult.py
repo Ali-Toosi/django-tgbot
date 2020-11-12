@@ -80,6 +80,7 @@ class InlineQueryResultGif(InlineQueryResult):
         'gif_height': int,
         'gif_duration': int,
         'thumb_url': str,
+        'thumb_mime_type': str,
         'title': str,
         'caption': str,
         'parse_mode': str,
@@ -94,7 +95,7 @@ class InlineQueryResultGif(InlineQueryResult):
         super(InlineQueryResultGif, self).__init__(obj)
 
     @classmethod
-    def a(cls, id: str, gif_url: str, thumb_url: str, gif_width: Optional[int] = None, gif_height: Optional[int] = None,
+    def a(cls, id: str, gif_url: str, thumb_url: str, thumb_mime_type: str = None, gif_width: Optional[int] = None, gif_height: Optional[int] = None,
           gif_duration: Optional[int] = None, title: Optional[str] = None, caption: Optional[str] = None,
           parse_mode: Optional[str] = None, input_message_content: Optional[inputmessagecontent.InputMessageContent] = None,
           reply_markup: Optional[inlinekeyboardmarkup.InlineKeyboardMarkup] = None):
@@ -111,6 +112,7 @@ class InlineQueryResultMpeg4Gif(InlineQueryResult):
         'mpeg4_height': int,
         'mpeg4_duration': int,
         'thumb_url': str,
+        'thumb_mime_type': str,
         'title': str,
         'caption': str,
         'parse_mode': str,
@@ -125,7 +127,7 @@ class InlineQueryResultMpeg4Gif(InlineQueryResult):
         super(InlineQueryResultMpeg4Gif, self).__init__(obj)
 
     @classmethod
-    def a(cls, id: str, mpeg4_url: str, thumb_url: str, mpeg4_width: Optional[int] = None,
+    def a(cls, id: str, mpeg4_url: str, thumb_url: str, thumb_mime_type: str = None, mpeg4_width: Optional[int] = None,
           mpeg4_height: Optional[int] = None, mpeg4_duration: Optional[int] = None, title: Optional[str] = None,
           caption: Optional[str] = None, parse_mode: Optional[str] = None,
           input_message_content: Optional[inputmessagecontent.InputMessageContent] = None,
