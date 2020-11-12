@@ -1,11 +1,11 @@
 [![Documentation Status](https://readthedocs.org/projects/django-tgbot/badge/?version=latest)](https://django-tgbot.readthedocs.io/en/latest/?badge=latest)
-[![Bot API Version](https://img.shields.io/badge/Bot%20API-v4.6-blue)](https://core.telegram.org/bots/api)
+[![Bot API Version](https://img.shields.io/badge/Bot%20API-v4.9-blue)](https://core.telegram.org/bots/api)
 [![Community Chat](https://img.shields.io/badge/Community-Chat-informational?logo=telegram)](https://t.me/DjangoTGBotChat)
 
 
 # Telegram Bots in Django
 
-Bot API version 4.6 ([Telegram bot API docs](https://core.telegram.org/bots/api))
+Bot API version 4.9 ([Telegram bot API docs](https://core.telegram.org/bots/api))
 
 Please note that all types and methods implemented here are defined exactly as they have been in [Telegram Bot API](https://core.telegram.org/bots/api). This means, although some type annotations
 and method comments have been provided in this package, you can find additional explanations for all types and methods on Telegram Bot API docs and use them in this package exactly the same way.
