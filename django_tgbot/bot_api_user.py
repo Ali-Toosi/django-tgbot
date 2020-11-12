@@ -6,6 +6,7 @@ import json
 import inspect
 
 from django_tgbot.exceptions import BotAPIRequestFailure
+from django_tgbot.types.botcommand import BotCommand
 from django_tgbot.types.chat import Chat
 from django_tgbot.types.chatmember import ChatMember
 from django_tgbot.types.file import File
@@ -46,7 +47,14 @@ def create_params_from_args(args=None, exclude=None):
             result[arg] = json.dumps(result[arg])
 
         if (type(result[arg])) == list:
-            result[arg] = json.dumps(result[arg])
+            to_be_json_list = []
+            for item in result[arg]:
+                if hasattr(item, 'to_dict'):
+                    to_be_json_list.append(item.to_dict())
+                else:
+                    to_be_json_list.append(item)
+
+            result[arg] = json.dumps(to_be_json_list)
 
     return result
 
@@ -127,6 +135,12 @@ class BotAPIUser:
 
     def getMe(self) -> User:
         return self.request_and_result(create_params_from_args(), User)
+
+    def getMyCommands(self) -> List[BotCommand]:
+        return self.request_and_result(create_params_from_args(), [BotCommand])
+
+    def setMyCommands(self, commands: List[BotCommand]) -> bool:
+        return self.request_and_result(create_params_from_args(locals()), bool)
 
     def getUpdates(self, offset=None, limit=100, timeout=0, allow_updates=None) -> List[Update]:
         """
