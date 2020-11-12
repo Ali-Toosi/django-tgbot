@@ -47,6 +47,7 @@ class Message(BasicType):
             'voice': message_types.Voice,
             'video_note': message_types.VideoNote,
             'contact': message_types.Contact,
+            'dice': message_types.Dice,
             'location': message_types.Location,
             'venue': message_types.Venue,
             'poll': message_types.Poll,
@@ -99,7 +100,7 @@ class Message(BasicType):
 # Placed here to avoid import cycles
 from . import user, chat, messageentity, audio, document, animation, game, photosize, \
     inlinekeyboardmarkup, passportdata, successfulpayment, invoice, poll, \
-    venue, location, contact, videonote, voice, video, sticker
+    venue, location, contact, videonote, voice, video, sticker, dice
 
 
 Message.fields.update({
@@ -130,6 +131,7 @@ Message.fields.update({
     'voice': voice.Voice,
     'video_note': videonote.VideoNote,
     'contact': contact.Contact,
+    'dice': dice.Dice,
     'location': location.Location,
     'venue': venue.Venue,
     'poll': poll.Poll,

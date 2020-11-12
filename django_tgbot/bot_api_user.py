@@ -139,7 +139,8 @@ class BotAPIUser:
 
     def sendMessage(self, chat_id, text, parse_mode=None, disable_web_page_preview=None, disable_notification=None,
                     reply_to_message_id=None,
-                    reply_markup: Union[None, InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply] = None) -> Message:
+                    reply_markup: Union[
+                        None, InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply] = None) -> Message:
         return self.request_and_result(create_params_from_args(locals()), Message)
 
     def forwardMessage(self, chat_id, from_chat_id, message_id, disable_notification=None):
@@ -147,7 +148,8 @@ class BotAPIUser:
 
     def sendPhoto(self, chat_id, photo, upload=False, caption=None, parse_mode=None, disable_notification=None,
                   reply_to_message_id=None,
-                  reply_markup: Union[None, InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply] = None) -> Message:
+                  reply_markup: Union[
+                      None, InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply] = None) -> Message:
         if not upload:
             return self.request_and_result(create_params_from_args(locals(), ['upload']), Message)
         else:
@@ -157,7 +159,8 @@ class BotAPIUser:
                 files={'photo': photo}
             )
 
-    def sendAudio(self, chat_id, audio, upload=False, caption=None, parse_mode=None, duration=None, performer=None, title=None,
+    def sendAudio(self, chat_id, audio, upload=False, caption=None, parse_mode=None, duration=None, performer=None,
+                  title=None,
                   thumb=None, disable_notification=None, reply_to_message_id=None,
                   reply_markup: Union[
                       None, InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply] = None) -> Message:
@@ -171,9 +174,11 @@ class BotAPIUser:
                 files={'audio': audio}
             )
 
-    def sendDocument(self, chat_id, document, upload=False, thumb=None, caption=None, parse_mode=None, disable_notification=None,
+    def sendDocument(self, chat_id, document, upload=False, thumb=None, caption=None, parse_mode=None,
+                     disable_notification=None,
                      reply_to_message_id=None,
-                     reply_markup: Union[None, InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply]=None) -> Message:
+                     reply_markup: Union[
+                         None, InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply] = None) -> Message:
 
         if not upload:
             return self.request_and_result(create_params_from_args(locals(), ['upload']), Message)
@@ -198,7 +203,8 @@ class BotAPIUser:
                 files={'video': video}
             )
 
-    def sendAnimation(self, chat_id, animation, upload=False, duration=None, width=None, height=None, thumb=None, caption=None,
+    def sendAnimation(self, chat_id, animation, upload=False, duration=None, width=None, height=None, thumb=None,
+                      caption=None,
                       parse_mode=None, disable_notification=None, reply_to_message_id=None,
                       reply_markup: Union[
                           None, InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply] = None) -> Message:
@@ -212,7 +218,8 @@ class BotAPIUser:
                 files={'animation': animation}
             )
 
-    def sendVoice(self, chat_id, voice, upload=False, caption=None, parse_mode=None, duration=None, disable_notification=None,
+    def sendVoice(self, chat_id, voice, upload=False, caption=None, parse_mode=None, duration=None,
+                  disable_notification=None,
                   reply_to_message_id=None,
                   reply_markup: Union[
                       None, InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply] = None) -> Message:
@@ -226,7 +233,8 @@ class BotAPIUser:
                 files={'voice': voice}
             )
 
-    def sendVideoNote(self, chat_id, video_note, upload=False, duration=None, length=None, thumb=None, disable_notification=None,
+    def sendVideoNote(self, chat_id, video_note, upload=False, duration=None, length=None, thumb=None,
+                      disable_notification=None,
                       reply_to_message_id=None,
                       reply_markup: Union[
                           None, InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply] = None) -> Message:
@@ -469,3 +477,11 @@ class BotAPIUser:
         return self.request_and_result(create_params_from_args(locals()), Message)
 
     # TODO getGameHighScores
+
+    def sendDice(
+            self, chat_id, emoji=None, disable_notification=None, reply_to_message_id=None,
+            allow_sending_without_reply=None, reply_markup: Union[
+                    None, InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply] = None):
+        return self.request_and_result(create_params_from_args(locals()), Message)
+
+
