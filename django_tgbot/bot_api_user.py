@@ -161,8 +161,8 @@ class BotAPIUser:
     def setWebhook(self, url):
         return self.send_request('setWebhook', {'url': url})
 
-    def sendMessage(self, chat_id, text, parse_mode=None, disable_web_page_preview=None, disable_notification=None,
-                    reply_to_message_id=None,
+    def sendMessage(self, chat_id, text, parse_mode=None, entities: List[MessageEntity] = None,
+                    disable_web_page_preview=None, disable_notification=None, reply_to_message_id=None,
                     reply_markup: Union[
                         None, InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply] = None) -> Message:
         return self.request_and_result(create_params_from_args(locals()), Message)
