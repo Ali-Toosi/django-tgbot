@@ -1,3 +1,4 @@
+from django_tgbot.types import messageentity
 from . import BasicType
 from . import polloption
 
@@ -15,7 +16,14 @@ class Poll(BasicType):
         'is_anonymous': BasicType.bool_interpreter,
         'type': str,
         'allows_multiple_answers': BasicType.bool_interpreter,
-        'correct_option_id': int
+        'correct_option_id': int,
+        'explanation': str,
+        'explanation_entities': {
+            'class': messageentity.MessageEntity,
+            'array': True
+        },
+        'open_period': int,
+        'close_date': int
     }
 
     def __init__(self, obj=None):
