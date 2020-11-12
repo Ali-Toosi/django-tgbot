@@ -3,6 +3,7 @@ site_name: django-tgbot
 nav:
     - Home: index.md
     - Creating bots: management_commands/createtgbot.md
+    - Using the Bot: classes/bot.md
     - Processors: processors.md
     - Getting Updates: getting_updates.md
     - Types:
