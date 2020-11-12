@@ -13,7 +13,7 @@ class Dice(BasicType):
     def get_emoji(self) -> str:
         return getattr(self, 'emoji')
 
-    def get_value(self) -> str:
+    def get_value(self) -> int:
         return getattr(self, 'value')
 
     @classmethod
