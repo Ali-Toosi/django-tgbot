@@ -4,3 +4,7 @@ class ProcessFailure(Exception):
 
 class BotAPIRequestFailure(Exception):
     pass
+
+
+class APIInputError(Exception):
+    pass
