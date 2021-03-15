@@ -8,7 +8,7 @@ from .models import TelegramUser, TelegramChat, TelegramState
 class TelegramBot(AbstractTelegramBot):
     def __init__(self, token, state_manager):
         super(TelegramBot, self).__init__(token, state_manager)
-    
+
     def get_db_user(self, telegram_id):
         return TelegramUser.objects.get_or_create(telegram_id=telegram_id)[0]
 
@@ -17,7 +17,7 @@ class TelegramBot(AbstractTelegramBot):
 
     def get_db_state(self, db_user, db_chat):
         return TelegramState.objects.get_or_create(telegram_user=db_user, telegram_chat=db_chat)[0]
-    
+
     def pre_processing(self, update: Update, user, db_user, chat, db_chat, state):
         super(TelegramBot, self).pre_processing(update, user, db_user, chat, db_chat, state)
 
@@ -25,7 +25,10 @@ class TelegramBot(AbstractTelegramBot):
         super(TelegramBot, self).post_processing(update, user, db_user, chat, db_chat, state)
 
 
+def import_processors():
+    from . import processors
+
+
 state_manager = StateManager()
 bot = TelegramBot(bot_token, state_manager)
-
-from . import processors
+import_processors()
