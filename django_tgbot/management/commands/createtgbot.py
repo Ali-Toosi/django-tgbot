@@ -44,6 +44,11 @@ class Command(BaseCommand):
                 "from . import credentials\n\n\nbot_token = credentials.BOT_TOKEN\napp_name = credentials.APP_NAME\n"
             )
 
+        with open(os.path.join(dst, os.path.join('migrations', '0001_initial.py')), 'r') as f:
+            migration = f.read().replace('_BOT_USERNAME', bot_username)
+        with open(os.path.join(dst, os.path.join('migrations', '0001_initial.py')), 'w') as f:
+            f.write(migration)
+
         self.stdout.write(self.style.SUCCESS('Successfully created bot {}(@{}).'.format(bot_name, bot_username)))
 
         self.stdout.write("Next steps:")
