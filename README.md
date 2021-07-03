@@ -5,7 +5,9 @@
 
 # Telegram Bots in Django
 
-Bot API version 4.9 ([Telegram bot API docs](https://core.telegram.org/bots/api))
+Bot API version 4.9 ([Telegram bot API docs](https://core.telegram.org/bots/api))  
+If you have questions about how you can use the package (or if you think you'd be able to help others) please join the Telegram group (@DjangoTGBotChat).  
+If you would like to contribute, read [this page](https://github.com/Ali-Toosi/django-tgbot/blob/master/.github/CONTRIBUTING.md) for a list of suggestions of what you could work on.  
 
 Please note that all types and methods implemented here are defined exactly as they have been in [Telegram Bot API](https://core.telegram.org/bots/api). This means, although some type annotations
 and method comments have been provided in this package, you can find additional explanations for all types and methods on Telegram Bot API docs and use them in this package exactly the same way.
