@@ -3,7 +3,7 @@
 This package can be used to have [Telegram Bots](https://core.telegram.org/bots) in your Django project.
  It is designed in a way allowing you to have multiple number of bots in the same project.
 
-Telegram Bot API version: 4.6 
+Telegram Bot API version: 4.9 
 
 ![demo](img/code_and_bot.jpg)
 
