@@ -37,7 +37,12 @@ class Command(BaseCommand):
                 return
 
         with open(os.path.join(dst, 'credentials.py'), 'w') as f:
-            f.write("# Do not remove these 2 lines:\nBOT_TOKEN = '{}'\nAPP_NAME = '{}'\n".format(bot_token, bot_username))
+            creds_help_text_lines = [
+                "# Do not remove these 2 lines:",
+                f"BOT_TOKEN = '{bot_token}'  # You should consider using env variables or a secret manager for this.",
+                f"APP_NAME = '{bot_username}'"
+            ]
+            f.write('\n'.join(creds_help_text_lines))
 
         with open(os.path.join(dst, '__init__.py'), 'w') as f:
             f.write(
