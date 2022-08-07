@@ -95,6 +95,10 @@ class Message(BasicType):
 
     def get_reply_markup(self):
         return getattr(self, 'reply_markup', None)
+    
+
+    def get_photo(self):
+        return getattr(self, 'photo', None)
 
 
 # Placed here to avoid import cycles

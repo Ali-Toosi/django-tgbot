@@ -11,7 +11,7 @@ __pycache__/
 .AppleDouble
 .LSOverride
 site/
-release
+release*
 .vscode
 db.sqlite3
 

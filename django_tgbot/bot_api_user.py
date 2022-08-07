@@ -402,7 +402,7 @@ class BotAPIUser:
         return self.request_and_result(create_params_from_args(locals()), bool)
 
     def editMessageText(self, text, chat_id=None, message_id=None, inline_message_id=None, parse_mode=None,
-                        disable_webpage_preview=None,
+                        disable_web_page_preview=None,
                         reply_markup: Union[
                             None, InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply] = None) -> Message:
 
