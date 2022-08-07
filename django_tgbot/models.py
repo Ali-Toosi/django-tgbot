@@ -44,14 +44,14 @@ class AbstractTelegramUser(models.Model):
     username = models.CharField(max_length=128, null=True, blank=True)
 
     def get_chat_state(self, chat: AbstractTelegramChat):
-        state = AbstractTelegramState.objects.get_or_create(
+        state, _ = AbstractTelegramState.objects.get_or_create(
             telegram_user__telegram_id=self.telegram_id,
             telegram_chat__telegram_id=chat.telegram_id
         )
         return state
 
     def get_private_chat_state(self):
-        state = AbstractTelegramState.objects.get_or_create(
+        state, _ = AbstractTelegramState.objects.get_or_create(
             telegram_user__telegram_id=self.telegram_id,
             telegram_chat__telegram_id=self.telegram_id
         )
