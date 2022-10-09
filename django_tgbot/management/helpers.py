@@ -19,7 +19,7 @@ def validate_token(bot_token):
     return True, get_me_result
 
 
-def prompt_token(command_line, prompt_message='Enter the bot token (retrieved from BotFather): '):
+def prompt_token(command_line, prompt_message='Enter the bot token (the one BotFather gave you): '):
     """
     Returns either None or getMe result
     """
@@ -61,17 +61,17 @@ def prompt_project_url(command_line, bot_token, bot_username):
     if project_url != '':
         confirmed = False
         while not confirmed:
-            confirmed_text = input("Bot webhook will be set to {}/{}/update/. Do you confirm? (Y/N): ".format(
+            confirmed_text = input("Bot webhook will be set to {}/{}/update/<bot_token>/. Do you confirm? (y/N): ".format(
                 project_url,
                 bot_username
             ))
-            confirmed = confirmed_text.lower() in ['yes', 'y']
+            confirmed = confirmed_text.lower() in ['yes', 'y', '']
             if not confirmed:
                 project_url = input("Enter the correct url: ")
                 while len(project_url) > 0 and project_url[-1] == '/':
                     project_url = project_url[:-1]
 
-        res = set_webhook(bot_token, "{}/{}/update/".format(project_url, bot_username))
+        res = set_webhook(bot_token, "{}/{}/update/{}/".format(project_url, bot_username, bot_token))
         if res['ok']:
             command_line.stdout.write(command_line.style.SUCCESS("Successfully set webhook."))
         else:
