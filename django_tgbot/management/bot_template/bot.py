@@ -1,8 +1,9 @@
 from django_tgbot.bot import AbstractTelegramBot
 from django_tgbot.state_manager.state_manager import StateManager
 from django_tgbot.types.update import Update
-from . import bot_token
+
 from .models import TelegramUser, TelegramChat, TelegramState
+from .credentials import BOT_TOKEN
 
 
 class TelegramBot(AbstractTelegramBot):
@@ -30,5 +31,13 @@ def import_processors():
 
 
 state_manager = StateManager()
-bot = TelegramBot(bot_token, state_manager)
+
+# Create a bot instance for each of the tokens in credentials file
+bots = dict()
+for bot_token in BOT_TOKEN.values():
+    bots[bot_token] = TelegramBot(bot_token, state_manager)
+
+# Define default bot in case other apps would like to send a message from the bot.
+default_bot = bots[list(BOT_TOKEN.values())[0]]
+
 import_processors()

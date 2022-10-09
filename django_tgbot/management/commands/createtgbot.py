@@ -2,6 +2,8 @@ import errno
 import os
 import shutil
 
+from textwrap import dedent
+
 from django.conf import settings
 from django.core.management.base import BaseCommand
 
@@ -36,18 +38,15 @@ class Command(BaseCommand):
                 self.stdout.write(self.style.ERROR("Couldn't copy bot files."))
                 return
 
-        with open(os.path.join(dst, 'credentials.py'), 'w') as f:
-            creds_help_text_lines = [
-                "# Do not remove these 2 lines:",
-                f"BOT_TOKEN = '{bot_token}'  # You should consider using env variables or a secret manager for this.",
-                f"APP_NAME = '{bot_username}'"
-            ]
-            f.write('\n'.join(creds_help_text_lines))
-
-        with open(os.path.join(dst, '__init__.py'), 'w') as f:
-            f.write(
-                "from . import credentials\n\n\nbot_token = credentials.BOT_TOKEN\napp_name = credentials.APP_NAME\n"
-            )
+        with open(os.path.join(dst, 'credentials.py'), 'a') as f:
+            creds_text = dedent(f"""\
+                BOT_TOKEN = {{
+                    "{bot_username}": "{bot_token}"
+                }}
+                
+                APP_NAME = "{bot_username}"
+            """)
+            f.write(creds_text)
 
         with open(os.path.join(dst, os.path.join('migrations', '0001_initial.py')), 'r') as f:
             migration = f.read().replace('_BOT_USERNAME', bot_username)
