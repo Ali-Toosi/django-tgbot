@@ -1,32 +1,17 @@
-import os
-
-from django.conf import settings
 from django.core.management.base import BaseCommand
 
 from django_tgbot.management import helpers
 
-import importlib.util
-
 
 class Command(BaseCommand):
-    help = 'Updates the webhook address for an existing tgbot'
+    help = 'Updates the webhook address for a Telegram Bot'
 
     def handle(self, *args, **options):
-        bot_username = input('Enter the username of the bot (without @): ').lower()
-        dst = os.path.join(settings.BASE_DIR, bot_username)
-        credentials_file = os.path.join(dst, 'credentials.py')
+        get_me_result, bot_token = helpers.prompt_token(self)
+        bot_name = str(get_me_result.get_first_name())
+        bot_username = str(get_me_result.get_username()).lower()
 
-        if not os.path.isfile(credentials_file):
-            self.stdout.write(
-                self.style.ERROR('No such bot found. Make sure you have created your bot with command `createtgbot`.')
-            )
-            return
-
-        spec = importlib.util.spec_from_file_location("credentials", credentials_file)
-        credentials_module = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(credentials_module)
-
-        bot_token = credentials_module.BOT_TOKEN
+        self.stdout.write(f"\nChanging the webhook for {bot_name} (@{bot_username})")
 
         again = True
         while again:
