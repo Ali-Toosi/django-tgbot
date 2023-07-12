@@ -20,7 +20,11 @@ from django_tgbot.types.replykeyboardremove import ReplyKeyboardRemove
 from django_tgbot.types.stickerset import StickerSet
 from django_tgbot.types.update import Update
 from django_tgbot.types.user import User
-from django_tgbot.types.userprofilephotos import UserProfilePhotos
+from django_tgbot.types.userprofilephotos import UserProfilePhotos 
+from django_tgbot.assistants.createChatInviteLink import CreateChatInviteLink
+
+
+
 
 
 def create_params_from_args(args=None, exclude=None):
@@ -125,12 +129,17 @@ class BotAPIUser:
         """
         res = self.send_request(inspect.stack()[1].function, data=data, files=files)
         if res['ok']:
+            # print(res['result'])
+            
             if type(result_type) == list and len(result_type) > 0:
                 if len(result_type) > 1:
                     raise ValueError("Passed `result_type` cannot have more than one element if it is a list.")
                 return list(map(result_type[0], list(res['result'])))
             else:
+                
                 return result_type(res['result'])
+                
+                    
         else:
             return res
 
@@ -171,9 +180,9 @@ class BotAPIUser:
         return self.request_and_result(create_params_from_args(locals()), Message)
 
     def sendPhoto(self, chat_id, photo, upload=False, caption=None, parse_mode=None, disable_notification=None,
-                  reply_to_message_id=None,
-                  reply_markup: Union[
-                      None, InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply] = None) -> Message:
+                reply_to_message_id=None,
+                reply_markup: Union[
+                    None, InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply] = None) -> Message:
         if not upload:
             return self.request_and_result(create_params_from_args(locals(), ['upload']), Message)
         else:
@@ -184,10 +193,10 @@ class BotAPIUser:
             )
 
     def sendAudio(self, chat_id, audio, upload=False, caption=None, parse_mode=None, duration=None, performer=None,
-                  title=None,
-                  thumb=None, disable_notification=None, reply_to_message_id=None,
-                  reply_markup: Union[
-                      None, InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply] = None) -> Message:
+                title=None,
+                thumb=None, disable_notification=None, reply_to_message_id=None,
+                reply_markup: Union[
+                    None, InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply] = None) -> Message:
 
         if not upload:
             return self.request_and_result(create_params_from_args(locals(), ['upload']), Message)
@@ -199,10 +208,10 @@ class BotAPIUser:
             )
 
     def sendDocument(self, chat_id, document, upload=False, thumb=None, caption=None, parse_mode=None,
-                     disable_notification=None,
-                     reply_to_message_id=None,
-                     reply_markup: Union[
-                         None, InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply] = None) -> Message:
+                    disable_notification=None,
+                    reply_to_message_id=None,
+                    reply_markup: Union[
+                        None, InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply] = None) -> Message:
 
         if not upload:
             return self.request_and_result(create_params_from_args(locals(), ['upload']), Message)
@@ -329,6 +338,19 @@ class BotAPIUser:
         return self.request_and_result(create_params_from_args(locals()), Message)
 
     def sendChatAction(self, chat_id, action):
+        """
+        Type of action to broadcast. Choose one, depending on what the user is about to receive:
+
+        typing for text messages, 
+        upload_photo for photos, 
+        record_video or upload_video for videos, 
+        record_voice or upload_voice for voice notes, 
+        upload_document for general files, 
+        choose_sticker for stickers, 
+        find_location for location data, 
+        record_video_note or 
+        upload_video_note for video notes.
+        """
         return self.request_and_result(create_params_from_args(locals()), bool)
 
     def getUserProfilePhotos(self, user_id, offset=None, limit=None):
@@ -337,7 +359,7 @@ class BotAPIUser:
     def getFile(self, file_id):
         return self.request_and_result(create_params_from_args(locals()), File)
 
-    def kickChatMember(self, chat_id, user_id, until_date=None):
+    def banChatMember(self, chat_id, user_id, until_date=None):
         return self.request_and_result(create_params_from_args(locals()), bool)
 
     def unbanChatMember(self, chat_id, user_id):
@@ -347,8 +369,8 @@ class BotAPIUser:
         return self.request_and_result(create_params_from_args(locals()), bool)
 
     def promoteChatMember(self, chat_id, user_id, can_change_info=None, can_post_messages=None, can_edit_messages=None,
-                          can_delete_messages=None, can_invite_users=None, can_restrict_members=None,
-                          can_pin_messages=None, can_promote_members=None):
+                        can_delete_messages=None, can_invite_users=None, can_restrict_members=None,
+                        can_pin_messages=None, can_promote_members=None):
         return self.request_and_result(create_params_from_args(locals()), bool)
 
     def setChatAdministratorCustomTitle(self, chat_id, user_id, custom_title):
@@ -359,6 +381,10 @@ class BotAPIUser:
 
     def exportChatInviteLink(self, chat_id):
         return self.request_and_result(create_params_from_args(locals()), bool)
+    
+    def createChatInviteLink(self , chat_id , name : str = None , expire_date : int = None , member_limit : int = 5 , 
+                            creates_join_request : bool  = False ) :
+        return self.request_and_result(create_params_from_args(locals()), CreateChatInviteLink )
 
     def setChatPhoto(self, chat_id, photo):
         return self.request_and_result(create_params_from_args(locals(), ['photo']), bool, files={'photo': photo})
