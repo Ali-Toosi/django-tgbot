@@ -1,5 +1,5 @@
 import inspect
-from . import BasicType
+
 
 
 class CreateChatInviteLink():
