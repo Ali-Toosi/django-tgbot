@@ -359,6 +359,9 @@ class BotAPIUser:
     def getFile(self, file_id):
         return self.request_and_result(create_params_from_args(locals()), File)
 
+    def kickChatMember(self, chat_id, user_id, until_date=None):
+        return self.request_and_result(create_params_from_args(locals()), bool)
+
     def banChatMember(self, chat_id, user_id, until_date=None):
         return self.request_and_result(create_params_from_args(locals()), bool)
 
