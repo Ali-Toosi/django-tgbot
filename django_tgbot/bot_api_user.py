@@ -135,8 +135,6 @@ class BotAPIUser:
                 return list(map(result_type[0], list(res['result'])))
             else:
                 return result_type(res['result'])
-                
-                    
         else:
             return res
 
