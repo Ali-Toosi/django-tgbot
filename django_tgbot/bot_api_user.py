@@ -385,9 +385,9 @@ class BotAPIUser:
     def exportChatInviteLink(self, chat_id):
         return self.request_and_result(create_params_from_args(locals()), bool)
     
-    def createChatInviteLink(self , chat_id , name : str = None , expire_date : int = None , member_limit : int = 5 , 
-                            creates_join_request : bool  = False ) :
-        return self.request_and_result(create_params_from_args(locals()), CreateChatInviteLink )
+    def createChatInviteLink(self, chat_id, name : str = None, expire_date : int = None, member_limit : int = 5, 
+                            creates_join_request : bool  = False) :
+        return self.request_and_result(create_params_from_args(locals()), CreateChatInviteLink)
 
     def setChatPhoto(self, chat_id, photo):
         return self.request_and_result(create_params_from_args(locals(), ['photo']), bool, files={'photo': photo})
