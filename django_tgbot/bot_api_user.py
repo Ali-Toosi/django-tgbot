@@ -129,8 +129,6 @@ class BotAPIUser:
         """
         res = self.send_request(inspect.stack()[1].function, data=data, files=files)
         if res['ok']:
-            # print(res['result'])
-            
             if type(result_type) == list and len(result_type) > 0:
                 if len(result_type) > 1:
                     raise ValueError("Passed `result_type` cannot have more than one element if it is a list.")
