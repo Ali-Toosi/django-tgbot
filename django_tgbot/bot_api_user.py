@@ -134,7 +134,6 @@ class BotAPIUser:
                     raise ValueError("Passed `result_type` cannot have more than one element if it is a list.")
                 return list(map(result_type[0], list(res['result'])))
             else:
-                
                 return result_type(res['result'])
                 
                     
